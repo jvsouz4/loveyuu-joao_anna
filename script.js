@@ -47,8 +47,18 @@ function updateCounter() {
     document.getElementById("timeTogether").textContent = "Estamos juntos há " + (totalTimeText || "menos de um dia");
 }
 
+function detectDevice() {
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const isSmallScreen = window.matchMedia("(max-width: 1024px)").matches;
+
+    if (isTouchDevice && isSmallScreen) {
+        document.body.classList.add("is-mobile");
+    }
+}
+
 setInterval(updateCounter, 1000);
 updateCounter();
+detectDevice();
 
 const items = document.querySelectorAll('.carousel-item');
 let current = 0;
